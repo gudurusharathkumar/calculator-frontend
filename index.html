@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <h1>Calculator Hub</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search calculators..." oninput="filterTools()" />
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h2>All Your Calculators in One Place</h2>
+  <p>Finance, Personal, Health & Business calculators.</p>
+</section>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showSection('finance', this)">Finance</button>
+  <button class="tab" onclick="showSection('personal', this)">Personal</button>
+  <button class="tab" onclick="showSection('health', this)">Health</button>
+  <button class="tab" onclick="showSection('business', this)">Business</button>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- ================= FINANCE (5) ================= -->
+  <div id="finance" class="section active">
+    <div class="grid">
+
+      <div class="tool" onclick="openTool('emiTool')"><h4>EMI</h4></div>
+      <div class="tool" onclick="openTool('gstTool')"><h4>GST</h4></div>
+      <div class="tool" onclick="openTool('roiTool')"><h4>ROI</h4></div>
+      <div class="tool" onclick="openTool('interestTool')"><h4>Interest</h4></div>
+      <div class="tool" onclick="openTool('breakevenTool')"><h4>Break-even</h4></div>
+
+    </div>
+  </div>
+
+  <!-- ================= PERSONAL (4) ================= -->
+  <div id="personal" class="section">
+    <div class="grid">
+
+      <div class="tool" onclick="openTool('ageTool')"><h4>Age</h4></div>
+      <div class="tool" onclick="openTool('percentageTool')"><h4>Percentage</h4></div>
+      <div class="tool" onclick="openTool('timeTool')"><h4>Time</h4></div>
+      <div class="tool" onclick="openTool('dateTool')"><h4>Date Diff</h4></div>
+
+    </div>
+  </div>
+
+  <!-- ================= HEALTH (4) ================= -->
+  <div id="health" class="section">
+    <div class="grid">
+
+      <div class="tool" onclick="openTool('bmiTool')"><h4>BMI</h4></div>
+      <div class="tool" onclick="openTool('calorieTool')"><h4>Calories</h4></div>
+      <div class="tool" onclick="openTool('waterTool')"><h4>Water</h4></div>
+      <div class="tool" onclick="openTool('pregnancyTool')"><h4>Pregnancy</h4></div>
+
+    </div>
+  </div>
+
+  <!-- ================= BUSINESS (3) ================= -->
+  <div id="business" class="section">
+    <div class="grid">
+
+      <div class="tool" onclick="openTool('startupTool')"><h4>Startup</h4></div>
+      <div class="tool" onclick="openTool('profitTool')"><h4>Profit</h4></div>
+      <div class="tool" onclick="openTool('costTool')"><h4>Cost</h4></div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= TOOL VIEW ================= -->
+<div id="toolView" class="tool-view">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <!-- FINANCE -->
+  <div id="emiTool" class="tool-content">
+    <h2>EMI</h2>
+    <input id="principal" placeholder="Principal (₹)" />
+    <input id="rate" placeholder="Rate (%)" />
+    <input id="time" placeholder="Time (Years)" />
+    <button onclick="getEMI()">Calculate</button>
+    <p id="emiResult"></p>
+  </div>
+
+  <div id="gstTool" class="tool-content">
+    <h2>GST</h2>
+    <input id="gstAmount" placeholder="Amount (₹)" />
+    <input id="gstRate" placeholder="Rate (%)" />
+    <button onclick="getGST()">Calculate</button>
+    <p id="gstResult"></p>
+  </div>
+
+  <div id="roiTool" class="tool-content">
+    <h2>ROI</h2>
+    <input id="roiInvestment" placeholder="Investment (₹)" />
+    <input id="roiReturns" placeholder="Gain (₹)" />
+    <button onclick="getROI()">Calculate</button>
+    <p id="roiResult"></p>
+  </div>
+
+  <div id="interestTool" class="tool-content">
+    <h2>Interest</h2>
+    <input id="intPrincipal" placeholder="Principal" />
+    <input id="intRate" placeholder="Rate (%)" />
+    <input id="intTime" placeholder="Time (Years)" />
+    <button onclick="getInterest()">Calculate</button>
+    <p id="interestResult"></p>
+  </div>
+
+  <div id="breakevenTool" class="tool-content">
+    <h2>Break-even</h2>
+    <input id="fixedCost" placeholder="Fixed Cost" />
+    <input id="pricePerUnit" placeholder="Price per Unit" />
+    <input id="variableCost" placeholder="Variable Cost" />
+    <button onclick="getBreakeven()">Calculate</button>
+    <p id="breakevenResult"></p>
+  </div>
+
+  <!-- PERSONAL -->
+  <div id="ageTool" class="tool-content">
+    <h2>Age</h2>
+    <input id="birthYear" placeholder="Birth Year" />
+    <button onclick="getAge()">Calculate</button>
+    <p id="ageResult"></p>
+  </div>
+
+  <div id="percentageTool" class="tool-content">
+    <h2>Percentage</h2>
+    <input id="obtained" placeholder="Obtained" />
+    <input id="total" placeholder="Total" />
+    <button onclick="getPercentage()">Calculate</button>
+    <p id="percentageResult"></p>
+  </div>
+
+  <div id="timeTool" class="tool-content">
+    <h2>Time Duration</h2>
+    <input type="time" id="startTime" step="1">
+    <input type="time" id="endTime" step="1">
+    <button onclick="getTimeDuration()">Calculate</button>
+    <p id="timeResult"></p>
+  </div>
+
+  <div id="dateTool" class="tool-content">
+    <h2>Date Difference</h2>
+    <input id="startDate" type="date" />
+    <input id="endDate" type="date" />
+    <button onclick="getDateDiff()">Calculate</button>
+    <p id="dateResult"></p>
+  </div>
+
+  <!-- HEALTH -->
+  <div id="bmiTool" class="tool-content">
+    <h2>BMI</h2>
+    <input id="bmiWeight" placeholder="Weight (kg)" />
+    <input id="bmiHeight" placeholder="Height (m)" />
+    <button onclick="getBMI()">Calculate</button>
+    <p id="bmiResult"></p>
+  </div>
+
+  <div id="calorieTool" class="tool-content">
+    <h2>Calories</h2>
+    <input id="weightCal" placeholder="Weight (kg)" />
+    <button onclick="getCalories()">Calculate</button>
+    <p id="calorieResult"></p>
+  </div>
+
+  <div id="waterTool" class="tool-content">
+    <h2>Water</h2>
+    <input id="weightWater" placeholder="Weight (kg)" />
+    <button onclick="getWater()">Calculate</button>
+    <p id="waterResult"></p>
+  </div>
+
+  <div id="pregnancyTool" class="tool-content">
+    <h2>Pregnancy</h2>
+    <input id="lastPeriod" type="date" />
+    <button onclick="getPregnancy()">Calculate</button>
+    <p id="pregnancyResult"></p>
+  </div>
+
+  <!-- BUSINESS -->
+  <div id="startupTool" class="tool-content">
+    <h2>Startup Valuation</h2>
+    <input id="revenueVal" placeholder="Revenue (₹)" />
+    <input id="growthVal" placeholder="Multiplier" />
+    <button onclick="getValuation()">Calculate</button>
+    <p id="valuationResult">Valuation:</p>
+  </div>
+
+  <div id="profitTool" class="tool-content">
+    <h2>Profit</h2>
+    <input id="costProfit" placeholder="Cost" />
+    <input id="revenueProfit" placeholder="Revenue" />
+    <button onclick="getProfit()">Calculate</button>
+    <p id="profitResult">Profit Margin:</p>
+  </div>
+
+  <div id="costTool" class="tool-content">
+    <h2>Cost Estimator</h2>
+    <input id="fixedCostEst" placeholder="Fixed Cost" />
+    <input id="variableCostEst" placeholder="Variable Cost" />
+    <input id="unitsEst" placeholder="Units" />
+    <button onclick="getCost()">Calculate</button>
+    <p id="costResult">Total Cost:</p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
