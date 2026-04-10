@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://calculator-hub-project.onrender.com";
 
 /* Tabs */
 function showSection(id, el) {
