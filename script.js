@@ -1,4 +1,4 @@
-const BASE_URL = "https://calculator-hub-project.onrender.com";
+const BASE_URL = "https://calculator-hub-project-1.onrender.com";
 
 /* Tabs */
 function showSection(id, el) {
@@ -26,7 +26,7 @@ function goBack() {
   document.getElementById("toolView").style.display = "none";
 }
 
-/* API calls */
+/* COMMON FETCH */
 async function fetchData(url, id, label) {
   try {
     const res = await fetch(url);
@@ -37,147 +37,144 @@ async function fetchData(url, id, label) {
   }
 }
 
-/* ================= EXISTING ================= */
+/* ================= FIXED FUNCTIONS ================= */
 
+/* BMI */
 function getBMI() {
-  fetchData(
-    `${BASE_URL}/api/calculators/bmi?weight=${bmiWeight.value}&height=${bmiHeight.value}`,
-    "bmiResult",
-    "BMI"
-  );
+  const weight = document.getElementById("bmiWeight").value;
+  const height = document.getElementById("bmiHeight").value;
+
+  fetchData(`${BASE_URL}/api/calculators/bmi?weight=${weight}&height=${height}`, "bmiResult", "BMI");
 }
 
+/* Percentage */
 function getPercentage() {
-  fetchData(
-    `${BASE_URL}/api/calculators/percentage?obtained=${obtained.value}&total=${total.value}`,
-    "percentageResult",
-    "Percentage"
-  );
+  const obtainedVal = document.getElementById("obtained").value;
+  const totalVal = document.getElementById("total").value;
+
+  fetchData(`${BASE_URL}/api/calculators/percentage?obtained=${obtainedVal}&total=${totalVal}`, "percentageResult", "Percentage");
 }
 
+/* Age */
 function getAge() {
-  fetchData(
-    `${BASE_URL}/api/calculators/age?birthYear=${birthYear.value}`,
-    "ageResult",
-    "Age"
-  );
+  const year = document.getElementById("birthYear").value;
+
+  fetchData(`${BASE_URL}/api/calculators/age?birthYear=${year}`, "ageResult", "Age");
 }
 
-
+/* EMI ✅ FIXED */
 function getEMI() {
-  fetchData(`${BASE_URL}/api/calculators/emi?principal=${principal.value}&rate=${rate.value}&time=${time.value}`, "emiResult", "EMI");
+  const p = document.getElementById("principal").value;
+  const r = document.getElementById("rate").value;
+  const t = document.getElementById("time").value;
+
+  fetchData(`${BASE_URL}/api/calculators/emi?principal=${p}&rate=${r}&time=${t}`, "emiResult", "EMI");
 }
 
-/* ================= FINANCE ================= */
-
+/* GST */
 function getGST() {
-  fetchData(
-    `${BASE_URL}/api/calculators/gst?amount=${gstAmount.value}&rate=${gstRate.value}`,
-    "gstResult",
-    "GST"
-  );
+  const amount = document.getElementById("gstAmount").value;
+  const rateVal = document.getElementById("gstRate").value;
+
+  fetchData(`${BASE_URL}/api/calculators/gst?amount=${amount}&rate=${rateVal}`, "gstResult", "GST");
 }
 
-
+/* ROI */
 function getROI() {
-  fetchData(`${BASE_URL}/api/calculators/roi?gain=${roiReturns.value}&investment=${roiInvestment.value}`, "roiResult", "ROI");
+  const gain = document.getElementById("roiReturns").value;
+  const invest = document.getElementById("roiInvestment").value;
+
+  fetchData(`${BASE_URL}/api/calculators/roi?gain=${gain}&investment=${invest}`, "roiResult", "ROI");
 }
 
+/* Interest */
 function getInterest() {
-  fetchData(
-    `${BASE_URL}/api/calculators/interest?p=${intPrincipal.value}&r=${intRate.value}&t=${intTime.value}`,
-    "interestResult",
-    "Interest"
-  );
+  const p = document.getElementById("intPrincipal").value;
+  const r = document.getElementById("intRate").value;
+  const t = document.getElementById("intTime").value;
+
+  fetchData(`${BASE_URL}/api/calculators/interest?p=${p}&r=${r}&t=${t}`, "interestResult", "Interest");
 }
 
-
+/* Break-even */
 function getBreakeven() {
-  fetchData(
-    `${BASE_URL}/api/calculators/break-even?fixedCost=${fixedCost.value}&pricePerUnit=${pricePerUnit.value}&variableCost=${variableCost.value}`,
-    "breakevenResult",
-    "Break-even Units"
-  );
+  const fixed = document.getElementById("fixedCost").value;
+  const price = document.getElementById("pricePerUnit").value;
+  const variable = document.getElementById("variableCost").value;
+
+  fetchData(`${BASE_URL}/api/calculators/break-even?fixedCost=${fixed}&pricePerUnit=${price}&variableCost=${variable}`, "breakevenResult", "Break-even Units");
 }
 
-/* ================= PERSONAL ================= */
-
-
+/* Time */
 function getTimeDuration() {
-  const start = startTime.value.trim();
-  const end = endTime.value.trim();
+  const start = document.getElementById("startTime").value;
+  const end = document.getElementById("endTime").value;
 
-  fetchData(
-    `${BASE_URL}/api/calculators/time-duration?start=${start}&end=${end}`,
-    "timeResult",
-    "Duration"
-  );
+  fetchData(`${BASE_URL}/api/calculators/time-duration?start=${start}&end=${end}`, "timeResult", "Duration");
 }
 
+/* Date diff */
 function getDateDiff() {
-  fetchData(
-    `${BASE_URL}/api/calculators/date-diff?start=${startDate.value}&end=${endDate.value}`,
-    "dateResult",
-    "Days"
-  );
+  const start = document.getElementById("startDate").value;
+  const end = document.getElementById("endDate").value;
+
+  fetchData(`${BASE_URL}/api/calculators/date-diff?start=${start}&end=${end}`, "dateResult", "Days");
 }
 
-/* ================= HEALTH ================= */
-
+/* Calories */
 function getCalories() {
-  fetchData(
-    `${BASE_URL}/api/calculators/calories?weight=${weightCal.value}`,
-    "calorieResult",
-    "Calories"
-  );
+  const weight = document.getElementById("weightCal").value;
+
+  fetchData(`${BASE_URL}/api/calculators/calories?weight=${weight}`, "calorieResult", "Calories");
 }
 
+/* Water */
 function getWater() {
-  fetchData(
-    `${BASE_URL}/api/calculators/water?weight=${weightWater.value}`,
-    "waterResult",
-    "Water Intake"
-  );
+  const weight = document.getElementById("weightWater").value;
+
+  fetchData(`${BASE_URL}/api/calculators/water?weight=${weight}`, "waterResult", "Water Intake");
 }
 
-
+/* Pregnancy */
 function getPregnancy() {
-  fetchData(`${BASE_URL}/api/calculators/pregnancy?lastPeriod=${lastPeriod.value}`, "pregnancyResult", "Due Date");
+  const date = document.getElementById("lastPeriod").value;
+
+  fetchData(`${BASE_URL}/api/calculators/pregnancy?lastPeriod=${date}`, "pregnancyResult", "Due Date");
 }
 
-/* ================= BUSINESS ================= */
-
-
+/* Startup */
 function getValuation() {
-  fetchData(`${BASE_URL}/api/calculators/startup?revenue=${revenueVal.value}&multiplier=${growthVal.value}`, "valuationResult", "Valuation");
+  const rev = document.getElementById("revenueVal").value;
+  const mul = document.getElementById("growthVal").value;
+
+  fetchData(`${BASE_URL}/api/calculators/startup?revenue=${rev}&multiplier=${mul}`, "valuationResult", "Valuation");
 }
 
+/* Profit */
 function getProfit() {
-  fetchData(
-    `${BASE_URL}/api/calculators/profit?cost=${costProfit.value}&revenue=${revenueProfit.value}`,
-    "profitResult",
-    "Profit Margin"
-  );
+  const cost = document.getElementById("costProfit").value;
+  const revenue = document.getElementById("revenueProfit").value;
+
+  fetchData(`${BASE_URL}/api/calculators/profit?cost=${cost}&revenue=${revenue}`, "profitResult", "Profit Margin");
 }
 
-
+/* Cost */
 function getCost() {
-  fetchData(`${BASE_URL}/api/calculators/cost?fixedCost=${fixedCostEst.value}&variableCost=${variableCostEst.value}&units=${unitsEst.value}`, "costResult", "Total Cost");
+  const fixed = document.getElementById("fixedCostEst").value;
+  const variable = document.getElementById("variableCostEst").value;
+  const units = document.getElementById("unitsEst").value;
+
+  fetchData(`${BASE_URL}/api/calculators/cost?fixedCost=${fixed}&variableCost=${variable}&units=${units}`, "costResult", "Total Cost");
 }
 
-/* ================= SEARCH ================= */
-
+/* Search */
 function filterTools() {
   const query = document.getElementById("searchInput").value.toLowerCase();
 
-  const sections = document.querySelectorAll(".section");
-
-  sections.forEach(section => {
+  document.querySelectorAll(".section").forEach(section => {
     let hasMatch = false;
 
-    const tools = section.querySelectorAll(".tool");
-
-    tools.forEach(tool => {
+    section.querySelectorAll(".tool").forEach(tool => {
       const title = tool.querySelector("h4").innerText.toLowerCase();
 
       if (title.includes(query)) {
