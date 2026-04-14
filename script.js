@@ -1,5 +1,4 @@
 const BASE_URL = "https://calculator-hub-project-1.onrender.com";
-
 /* Tabs */
 function showSection(id, el) {
   document.querySelector(".container").style.display = "block";
@@ -27,32 +26,24 @@ function goBack() {
 }
 
 /* COMMON FETCH */
-async function fetchData(url, id, label) {
-  try {
-    console.log("API URL:", url);
+async function fetchData(url, resultId) {
+    try {
+        const res = await fetch(url);
 
-    const res = await fetch(url, {
-      method: "GET",
-      mode: "cors"
-    });
+        if (!res.ok) {
+            throw new Error("API error");
+        }
 
-    if (!res.ok) {
-      throw new Error("API failed");
+        const data = await res.json();
+
+        document.getElementById(resultId).innerText =
+            "Result: " + data.result;
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById(resultId).innerText =
+            "Error fetching result";
     }
-
-    const data = await res.json();
-
-    console.log("Response:", data);
-
-    document.getElementById(id).innerText =
-      `${label}: ${data.result}`;
-
-  } catch (e) {
-    console.error("ERROR:", e);
-
-    document.getElementById(id).innerText =
-      "Error: Backend not responding";
-  }
 }
 
 /* ================= FIXED FUNCTIONS ================= */
@@ -81,12 +72,14 @@ function getAge() {
 }
 
 /* EMI ✅ FIXED */
-function getEMI() {
-  const p = document.getElementById("principal").value;
-  const r = document.getElementById("rate").value;
-  const t = document.getElementById("time").value;
+function calculateEMI() {
+    const p = document.getElementById("emiPrincipal").value;
+    const r = document.getElementById("emiRate").value;
+    const t = document.getElementById("emiTime").value;
 
-  fetchData(`${BASE_URL}/api/calculators/emi?principal=${p}&rate=${r}&time=${t}`, "emiResult", "EMI");
+    const url = `${BASE_URL}/api/emi?principal=${p}&rate=${r}&time=${t}`;
+
+    fetchData(url, "emiResult");
 }
 
 /* GST */
