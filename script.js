@@ -29,11 +29,29 @@ function goBack() {
 /* COMMON FETCH */
 async function fetchData(url, id, label) {
   try {
-    const res = await fetch(url);
+    console.log("API URL:", url);
+
+    const res = await fetch(url, {
+      method: "GET",
+      mode: "cors"
+    });
+
+    if (!res.ok) {
+      throw new Error("API failed");
+    }
+
     const data = await res.json();
-    document.getElementById(id).innerText = `${label}: ${data.result}`;
+
+    console.log("Response:", data);
+
+    document.getElementById(id).innerText =
+      `${label}: ${data.result}`;
+
   } catch (e) {
-    document.getElementById(id).innerText = "Error";
+    console.error("ERROR:", e);
+
+    document.getElementById(id).innerText =
+      "Error: Backend not responding";
   }
 }
 
